@@ -1,0 +1,23 @@
+os: osx
+env:
+  global:
+  - BOOST_ROOT=/usr/local/Cellar/boost/1.67.0_1
+  - BOOST_INCLUDEDIR=/usr/local/Cellar/boost/1.67.0_1/include
+  - BOOST_LIBRARYDIR=/usr/local/Cellar/boost-python/1.67.0/lib
+install:
+- brew upgrade boost openssl cmake
+- brew install boost-python
+- ln -s /usr/local/Cellar/boost-python/1.67.0/lib/libboost_python27-mt.dylib /usr/local/Cellar/boost-python/1.67.0/lib/libboost_python-mt.dylib
+- ln -s /usr/local/Cellar/boost-python/1.67.0/lib/libboost_python27-mt.a /usr/local/Cellar/boost-python/1.67.0/lib/libboost_python-mt.a
+before_script:
+- git submodule update --init --recursive
+script:
+- "./build_all/mac/release.sh"
+deploy:
+  provider: pypi
+  user: "vjrantal"
+  password:
+    secure: fXVzVb2sCcsSVC1fxcqLjs19Pslx5riP/PrnCSigxam0DAQPL6CEEt3I0K2sCixed74P+V7jcTYLovFJsipoLbb8cWZwI446dKVgmX3EC68Uw7HSE9O3ar2/rvnsiVaDCXXjpUg6Lav0y8QiPiF2a+6U0xKuJBHII9pbKOe6HLKJcMYkanAyU8YnuR9yH7pNfKJz0jgqrBmzv6Dg4MS9iNvPE6Mhl4bfIUHS9jDyIdxBeF7LOJt56KvJ6ha6azKepNRjRy9uGSUcxBoqIig5CIw7ykUSZVGVWu7hNfxMy3N4kTc3tWh142QAm3W15f1savJVe9M4bWUpkJUpoWUmTtfqQV0b9jwR8v3hT2oU9Sar/1lX3ac2KLQam2imFomkpF2MWJMx2NafK4RRbRWwmDq1oq8lm8V4sy0lJnUb4g40dMWHNyLiBuXDBrk+kI3eg5nKsfdiTD2mjua1tdDptfTfJUjWt94sLQ+M0R+UIqippWFppSgpsBMkdV7g/0vIFIyHpJfUyPpW2Mo2t3vMCYHiNs1KS6LgGuD3LKtXrO30H8d15I5zPC/eLYShwOXCYuMmbo+TIvWOQeJeymybpGJ1YINdq6TazAd9EZCXHtxPzoYxUI6RrleaB9M/y9TXLs1D2OYQSMT1tFKuzqTVaLR8J2vrU7rFb/wYPi3yb8s=
+  server: https://testpypi.python.org/pypi
+  on:
+    branch: travis
