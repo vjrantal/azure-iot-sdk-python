@@ -21,6 +21,7 @@ compileAsC99()
 # get boost
 set(Boost_USE_MULTITHREADED      ON)
 set(Boost_USE_STATIC_RUNTIME     OFF)
+set(Boost_USE_STATIC_LIBS        ON)
 
 if(WIN32)
     set(Boost_INCLUDE_DIR $ENV{BOOST_ROOT})

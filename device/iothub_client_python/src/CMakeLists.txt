@@ -16,7 +16,7 @@ endif()
 include_directories(.)
 include_directories(${DEV_AUTH_MODULES_CLIENT_INC_FOLDER})
 
-add_library( iothub_client_python SHARED
+add_library( iothub_client_python STATIC
     ${iothub_client_python_c_files} 
 )
 
